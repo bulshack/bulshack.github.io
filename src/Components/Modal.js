@@ -43,7 +43,7 @@ const techIcons = {
 // Simpler variants with eased transitions
 const backdropVariants = {
   initial: { opacity: 0 },
-  animate: { 
+  animate: {
     opacity: 1,
     transition: { duration: 0.3, ease: "easeOut" }
   },
@@ -61,12 +61,12 @@ const modalVariants = {
       ease: "easeOut"
     }
   },
-  exit: { 
-    scale: 0.9, 
+  exit: {
+    scale: 0.9,
     opacity: 0,
     rotateY: 0,
     transition: {
-      duration: 0.3, 
+      duration: 0.3,
       ease: "easeIn"
     }
   }
@@ -86,7 +86,12 @@ const childVariants = {
 const Modal = ({ project, uniqueId, isModalOpen, closeModal }) => {
   const hasGallery = project?.media?.length > 0 && project.showGallery !== false;
   const showVisitButton = project?.link && project.showVisitButton !== false;
-  const imageUrl = project?.image || defaultImage;
+  const getImagePath = (img) => {
+    if (!img) return defaultImage;
+    return typeof img === 'object' ? img.default || img : img;
+  };
+
+  const imageUrl = getImagePath(project?.image);
 
   useEffect(() => {
     const handleEsc = (event) => {
@@ -133,7 +138,7 @@ const Modal = ({ project, uniqueId, isModalOpen, closeModal }) => {
               >
                 &times;
               </button>
-              <motion.div 
+              <motion.div
                 className="modal-details"
                 variants={containerVariants}
                 initial="initial"

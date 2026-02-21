@@ -34,7 +34,7 @@ const techIcons = {
   Confluence: <SiConfluence />,
   Rider: <SiRider />,
   Github: <SiGithub />,
-  VS: <SiVisualstudio />,  
+  VS: <SiVisualstudio />,
 };
 
 const techVariants = {
@@ -75,13 +75,24 @@ const ProjectCard = ({ project, uniqueId, setSelectedProject }) => {
     }
   };
 
-  const imageUrl = project.image
-    ? project.image.startsWith('http')
-      ? project.image
-      : project.image.startsWith('/')
-      ? `${process.env.PUBLIC_URL}${project.image}`
-      : `${process.env.PUBLIC_URL}/${project.image}`
-    : '/default_image.jpg';
+  const getImagePath = (img) => {
+    if (!img) return `${process.env.PUBLIC_URL}/default_image.png`;
+
+    // If it's a webpack import object
+    const path = typeof img === 'object' ? img.default || img : img;
+
+    if (typeof path !== 'string') return `${process.env.PUBLIC_URL}/default_image.png`;
+
+    if (path.startsWith('http')) return path;
+    if (path.startsWith('data:')) return path;
+    if (path.startsWith('/') || path.startsWith('static/')) {
+      return path.startsWith('/') ? path : `/${path}`;
+    }
+
+    return `${process.env.PUBLIC_URL}/${path}`;
+  };
+
+  const imageUrl = getImagePath(project.image);
 
   return (
     <motion.div

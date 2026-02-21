@@ -302,12 +302,12 @@ const Home = () => {
         </Typography>
         {/* A short teaser about yourself */}
         <Typography variant="h5" className="about-text" sx={{ mb: 2 }}>
-        I’m Daniel Lopez, a <strong>Software Engineer</strong>, <strong>Game Developer</strong>, 
-        and <strong>Game Designer</strong> originally from <strong>Venezuela</strong>. 
-        With a passion for video games, eSports, and emerging technologies, 
-        I’ve gone from hosting game servers at age eight to <strong>working alongside 
-        top talent</strong> on cutting-edge VR/AR <strong>and</strong> video game experiences.
-        <br /><br />
+          I’m Daniel Lopez, a <strong>Software Engineer</strong>, <strong>Game Developer</strong>,
+          and <strong>Game Designer</strong> originally from <strong>Venezuela</strong>.
+          With a passion for video games, eSports, and emerging technologies,
+          I’ve gone from hosting game servers at age eight to <strong>working alongside
+            top talent</strong> on cutting-edge VR/AR and video game experiences.
+          <br /><br />
         </Typography>
 
         {/* Button leading to the full About page */}

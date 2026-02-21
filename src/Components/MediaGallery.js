@@ -25,6 +25,12 @@ const MediaGallery = ({ media }) => {
     setSelectedIndex((prevIndex) => (prevIndex - 1 + media.length) % media.length);
   };
 
+  const getImagePath = (img) => {
+    if (!img) return defaultImage;
+    const path = typeof img === 'object' ? img.default || img : img;
+    return path;
+  };
+
   return (
     <div className="media-gallery">
       {/* Use the same .gallery-title class as in modal */}
@@ -39,7 +45,7 @@ const MediaGallery = ({ media }) => {
             onClick={() => openMedia(index)}
           >
             <img
-              src={src}
+              src={getImagePath(src)}
               alt={`Media ${index + 1}`}
               className="media-thumbnail"
               onError={(e) => { e.target.src = defaultImage; }}
@@ -67,7 +73,7 @@ const MediaGallery = ({ media }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={media[selectedIndex]}
+                src={getImagePath(media[selectedIndex])}
                 alt={`Media ${selectedIndex + 1}`}
                 className="media-fullscreen-image"
                 onError={(e) => { e.target.src = defaultImage; }}
